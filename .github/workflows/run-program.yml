@@ -2,7 +2,7 @@ name: Run Job Tracker
 
 on:
   schedule:
-    - cron: '0 0 */2 * *'  # Runs every 2 days
+    - cron: '0 13 * * *'  # Runs every daily 
   workflow_dispatch:      # Lets you click the manual run button
 
 jobs:
