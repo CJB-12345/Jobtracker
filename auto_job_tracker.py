@@ -133,7 +133,7 @@ def send_email(new_jobs):
     msg = MIMEMultipart()
     msg['From'] = SENDER_EMAIL
     msg['To'] = RECEIVER_EMAIL or SENDER_EMAIL
-    msg['Subject'] = f"🚨 New  Internships Found ({len(new_jobs)} new)"
+    msg['Subject'] = f"🚨 New Internships Found ({len(new_jobs)} new)"
 
     body = "Here are the new internship/co-op postings matching your criteria:\n\n"
     for job in new_jobs:
