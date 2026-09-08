@@ -45,7 +45,7 @@ COMPANIES = [
     "Firefly Aerospace", "Sierra Space", "Axiom Space", "Astra",
     "Northrop Grumman", "Lockheed Martin", "United Launch Alliance",
     "Virgin Galactic", "Redwire Space", "Intuitive Machines",
-    "Astrobotic", "Varda Space Industries",
+    "Astrobotic", "Varda Space Industries", "Boeing"
 
     # Film industry - camera/optics engineering
     "ARRI", "RED Digital Cinema", "IMAX", "Panavision", "Sony Pictures Imageworks",
@@ -133,7 +133,7 @@ def send_email(new_jobs):
     msg = MIMEMultipart()
     msg['From'] = SENDER_EMAIL
     msg['To'] = RECEIVER_EMAIL or SENDER_EMAIL
-    msg['Subject'] = f"🚨 New Internships Found ({len(new_jobs)} new)"
+    msg['Subject'] = f"🚨 New  Internships Found ({len(new_jobs)} new)"
 
     body = "Here are the new internship/co-op postings matching your criteria:\n\n"
     for job in new_jobs:
