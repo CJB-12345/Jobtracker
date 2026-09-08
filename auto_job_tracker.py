@@ -15,23 +15,64 @@ RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL")
 # Saves the tracking file directly inside your repository directory
 SEEN_JOBS_FILE = os.path.join(os.path.dirname(__file__), "seen_jobs.json")
 
-# Your Target Companies
 COMPANIES = [
-    "Rivian", "Lucid", "Canoo", "Tesla", 
-    "Slate", "Ferrari", "Porsche", "McLaren", "Ford", "GM", "Kia", 
-    "Toyota", "Honda", "Hyundai", "BMW", "Mercedes Benz", "Audi", 
-    "Suzuki", "Volkswagen", "Nissan", "Subaru", "Mazda", "Volvo", 
-    "Polestar", "Jaguar", "Land Rover", "Mitsubishi", "Stellantis"
+    "Rivian", "Lucid", "Canoo", "Tesla",
+    "Slate", "Ferrari", "Porsche", "McLaren", "Ford", "GM", "Kia",
+    "Toyota", "Honda", "Hyundai", "BMW", "Mercedes Benz", "Audi",
+    "Suzuki", "Volkswagen", "Nissan", "Subaru", "Mazda", "Volvo",
+    "Polestar", "Jaguar", "Land Rover", "Mitsubishi", "Stellantis",
+
+    # F1 teams (2026 grid, distinct from road-car parent companies)
+    "Mercedes-AMG Petronas F1 Team", "Red Bull Racing", "Racing Bulls",
+    "Williams Racing", "Aston Martin F1 Team", "Alpine F1 Team",
+    "Audi F1", "Haas F1 Team", "Cadillac F1",
+    "Ford Performance", "Toyota Racing Development", "Honda Racing Corporation",
+
+    # NASCAR teams
+    "Hendrick Motorsports", "Joe Gibbs Racing", "Team Penske",
+    "Stewart-Haas Racing", "Richard Childress Racing", "Chip Ganassi Racing",
+    "23XI Racing", "Trackhouse Racing", "RFK Racing", "Front Row Motorsports",
+    "Wood Brothers Racing", "Spire Motorsports", "Kaulig Racing",
+    "JTG Daugherty Racing", "Legacy Motor Club",
+
+    # IndyCar teams
+    "Andretti Global", "Arrow McLaren", "Rahal Letterman Lanigan Racing",
+    "Ed Carpenter Racing", "A.J. Foyt Racing", "Meyer Shank Racing",
+    "Juncos Hollinger Racing", "Dale Coyne Racing", "PREMA Racing",
+
+    # Space companies
+    "SpaceX", "Blue Origin", "Rocket Lab", "Relativity Space",
+    "Firefly Aerospace", "Sierra Space", "Axiom Space", "Astra",
+    "Northrop Grumman", "Lockheed Martin", "United Launch Alliance",
+    "Virgin Galactic", "Redwire Space", "Intuitive Machines",
+    "Astrobotic", "Varda Space Industries",
+
+    # Film industry - camera/optics engineering
+    "ARRI", "RED Digital Cinema", "IMAX", "Panavision", "Sony Pictures Imageworks",
+
+    # Film industry - practical effects/animatronics/production design
+    "Legacy Effects", "Weta Workshop", "Industrial Light & Magic",
+    "Walt Disney Imagineering",
+
+    # Film industry - rigging/camera support/motion control
+    "Chapman/Leonard Studio Equipment", "J.L. Fisher", "Mo-Sys", "Kessler Crane",
 ]
 
 COMPANY_ALIASES = {
     "ECR": "Ed Carpenter Racing",
-    "GM": "General Motors"
+    "GM": "General Motors",
+    "RLL": "Rahal Letterman Lanigan Racing",
+    "JGR": "Joe Gibbs Racing",
+    "RFK": "RFK Racing",
+    "ULA": "United Launch Alliance",
+    "ILM": "Industrial Light & Magic",
+    "WDI": "Walt Disney Imagineering",
+    "TRD": "Toyota Racing Development",
+    "HRC": "Honda Racing Corporation",
 }
 
 # Your Target Keywords
-QUERY_KEYWORDS = '"testing" OR "aerodynamics" OR "aero" OR "validation" OR "hardware in the loop" OR "wind tunnel" OR "trackside" OR "hands-on"'
-
+QUERY_KEYWORDS = '"mechanical design" OR "design engineer" OR "test engineer" OR "validation engineer" OR "hands-on" OR "trackside" OR "testing" OR "manufacturing" OR "fabrication" OR "prototyping" OR "CAD" OR "suspension" OR "vehicle dynamics" OR "simulation"'
 def load_seen_jobs():
     if not os.path.exists(SEEN_JOBS_FILE):
         return set()
@@ -92,7 +133,7 @@ def send_email(new_jobs):
     msg = MIMEMultipart()
     msg['From'] = SENDER_EMAIL
     msg['To'] = RECEIVER_EMAIL or SENDER_EMAIL
-    msg['Subject'] = f"🚨 New Aero/Testing Internships Found ({len(new_jobs)} new)"
+    msg['Subject'] = f"🚨 New Internships Found ({len(new_jobs)} new)"
 
     body = "Here are the new internship/co-op postings matching your criteria:\n\n"
     for job in new_jobs:
